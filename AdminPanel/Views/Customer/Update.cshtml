@@ -1,0 +1,62 @@
+﻿@model AdminPanel.Models.Customer
+@{
+    ViewBag.Title = "Yenilə";
+}
+
+<h2>Müştəri dəyiş</h2>
+
+<form action="@Url.Action("Update", "Customer")" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Firstname">Adı</label>
+                <input type="text" name="Firstname" class="form-control" id="Firstname" data-validation="required" value="@Model.Firstname">
+            </div>
+            <div class="form-group">
+                <label for="Lastname">Soyadı</label>
+                <input type="text" name="Lastname" class="form-control" id="Lastname"  value="@Model.Lastname"
+                       data-validation="length alphanumeric"
+                       data-validation-length="3-12"
+                       data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+            </div>
+
+            <div class="form-group">
+                <label for="Photo">Şəkli</label>
+                <img src="~/Uploads/@Model.Photo"/>
+                <input type="file" name="Photo" class="form-control" id="Photo"
+                       data-validation="mime size"
+                       data-validation-allowing="jpg, png, gif"
+                       data-validation-max-size="2M">
+            </div>
+            <div class="form-group">
+                <label for="Phone">Nömrə</label>
+                <input type="text" name="Phone" class="form-control" id="Phone"  value="@Model.Phone">
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label for="Email">E-poçt</label>
+                <input type="email" name="Email" class="form-control" id="Email" value="@Model.Email">
+            </div>
+            <div class="form-group">
+                <label for="Birthday">Doğum tarixi</label>
+                <input type="text" name="Birthday" class="form-control" id="Birthday" data-validation="date" data-validation-format="yyyy-mm-dd" value="@Model.Birthday?.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="form-group">
+                <label for="Address">Ünvan</label>
+                <input type="text" name="Address" class="form-control" id="Address" value="@Model.Address">
+            </div>
+            <input type="hidden" name="Id" value="@Model.Id" />
+
+            <button type="submit" class="btn btn-primary">Yenilə</button>
+        </div>
+    </div>
+</form>
+
+
+@section scripts{
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script>$.validate();</script>
+}

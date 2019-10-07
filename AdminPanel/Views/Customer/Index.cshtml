@@ -1,0 +1,45 @@
+﻿@model List<AdminPanel.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Müştərilər</h2>
+
+<a href="@Url.Action("Create", "Customer")" class="btn btn-outline-success">Əlavə et</a>
+
+<table class="table table-dark mt-3">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Adı</th>
+            <th scope="col">Soyadı</th>
+            <th scope="col">Nömrə</th>
+            <th scope="col">E-poçt</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+        <tr>
+            <td>
+                @if (!string.IsNullOrEmpty(customer.Photo))
+                {
+                    <img src="~/Uploads/@customer.Photo" width="50" alt="@customer.Firstname @customer.Lastname" />
+                }
+            </td>
+            <td>@customer.Firstname</td>
+            <td>@customer.Lastname</td>
+            <td>@customer.Phone</td>
+            <td>@customer.Email</td>
+            <td>
+                <a href="@Url.Action("Update", "Customer", new { Id = customer.Id})">dəyiş</a>
+                <a href="@Url.Action("Delete", "Customer", new { Id = customer.Id})" onclick="return confirm();">sil</a>
+
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
